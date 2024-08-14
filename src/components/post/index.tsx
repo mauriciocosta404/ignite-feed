@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./index.module.css";
+import { Comment } from "../comment";
 
 interface PostPros {
   author: string;
@@ -41,6 +42,13 @@ export const Post: React.FC<PostPros> = ({ author, content }) => {
           <button type="submit">Publicar</button>
         </footer>
       </form>
+
+      <div className={styles.commentList}>
+        <Comment/>
+        <Comment/>
+        <Comment/>
+        <Comment/>
+      </div>
     </article>
   );
 };
