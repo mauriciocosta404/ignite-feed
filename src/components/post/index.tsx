@@ -18,8 +18,9 @@ export const Post: React.FC<PostPros> = ({ author, content }) => {
             <span>Web Developer</span>
           </div>
 
-          <time title="11 de Maio as 8:13" dateTime="2022-05-11 08:13:30">Publicado há 1h</time>
         </div>
+        
+        <time title="11 de Maio as 8:13" dateTime="2022-05-11 08:13:30">Publicado há 1h</time>
       </header>
 
       <div className={styles.content}>
