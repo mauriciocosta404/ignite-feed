@@ -19,7 +19,7 @@ export const Post: React.FC<PostPros> = ({ author, content }) => {
           </div>
 
         </div>
-        
+
         <time title="11 de Maio as 8:13" dateTime="2022-05-11 08:13:30">Publicado há 1h</time>
       </header>
 
@@ -32,6 +32,15 @@ export const Post: React.FC<PostPros> = ({ author, content }) => {
 
         <p><a href="">#novoprojeto #nlw #rocketseat</a></p>
       </div>
+
+      <form className={styles.commentForm}>
+        <strong>Deixe seu feedback</strong>
+        <textarea placeholder="deixe um comentário..." name="" id=""></textarea>
+        
+        <footer>
+          <button type="submit">Publicar</button>
+        </footer>
+      </form>
     </article>
   );
 };
