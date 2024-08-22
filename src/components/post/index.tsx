@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./index.module.css";
 import { Comment } from "../comment";
+import { Avatar } from "../avatar";
 
 interface PostPros {
   author: string;
@@ -12,7 +13,7 @@ export const Post: React.FC<PostPros> = ({ author, content }) => {
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-          <img className={styles.avatar} src="https://avatars.githubusercontent.com/u/95001318?v=4"/>
+          <Avatar src="https://avatars.githubusercontent.com/u/95001318?v=4" />
           
           <div className={styles.authorInfo}>
             <strong>Mauricio Costa</strong>
