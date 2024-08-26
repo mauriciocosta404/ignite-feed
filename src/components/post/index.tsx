@@ -3,26 +3,39 @@ import styles from "./index.module.css";
 import { Comment } from "../comment";
 import { Avatar } from "../avatar";
 
-interface PostPros {
-  author: string;
+interface Author{
+  avatarUrl: string;
+  name: string;
+  role: string;
+}
+
+interface Content{
+  type: string;
   content: string;
 }
 
-export const Post: React.FC<PostPros> = ({ author, content }) => {
+interface PostPros {
+  author: Author;
+  content: Content[];
+  publishedAt: Date;
+}
+
+
+export const Post: React.FC<PostPros> = ({ author, content, publishedAt }) => {
   return (
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-          <Avatar src="https://avatars.githubusercontent.com/u/95001318?v=4" />
+          <Avatar src={author.avatarUrl} />
           
           <div className={styles.authorInfo}>
-            <strong>Mauricio Costa</strong>
-            <span>Web Developer</span>
+            <strong>{author.name}</strong>
+            <span>{author.role}</span>
           </div>
 
         </div>
 
-        <time title="11 de Maio as 8:13" dateTime="2022-05-11 08:13:30">Publicado há 1h</time>
+        <time title="11 de Maio as 8:13" dateTime={publishedAt.toDateString()}>Publicado há 1h</time>
       </header>
 
       <div className={styles.content}>
@@ -45,10 +58,11 @@ export const Post: React.FC<PostPros> = ({ author, content }) => {
       </form>
 
       <div className={styles.commentList}>
-        <Comment/>
-        <Comment/>
-        <Comment/>
-        <Comment/>
+        {
+          Array.from({length:5}).map(()=>{
+            return (<Comment/>)
+          })
+        }
       </div>
     </article>
   );
