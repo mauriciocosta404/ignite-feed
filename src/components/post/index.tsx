@@ -2,6 +2,8 @@ import React from "react";
 import styles from "./index.module.css";
 import { Comment } from "../comment";
 import { Avatar } from "../avatar";
+import {format, formatDistanceToNow} from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 interface Author{
   avatarUrl: string;
@@ -22,6 +24,15 @@ interface PostPros {
 
 
 export const Post: React.FC<PostPros> = ({ author, content, publishedAt }) => {
+  const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'",{
+    locale: ptBR,
+  });
+
+  const publishedDateRelativeToNow = formatDistanceToNow(publishedAt,{
+    locale: ptBR,
+    addSuffix: true
+  })
+
   return (
     <article className={styles.post}>
       <header>
@@ -35,17 +46,16 @@ export const Post: React.FC<PostPros> = ({ author, content, publishedAt }) => {
 
         </div>
 
-        <time title="11 de Maio as 8:13" dateTime={publishedAt.toDateString()}>Publicado há 1h</time>
+        <time title={publishedDateFormatted} dateTime={publishedAt.toDateString()}>{publishedDateRelativeToNow}</time>
       </header>
 
       <div className={styles.content}>
-        <p>Fala galeraa 👋</p>
-
-        <p>Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀</p>
-
-        <p>👉 <a href="">jane.design/doctorcare</a></p>
-
-        <p><a href="">#novoprojeto #nlw #rocketseat</a></p>
+        {
+          content.map(line => {
+            if(line.type === 'paragraph') return <p>{line.content}</p>
+            if(line.type === 'link') return <p><a href="">{line.content}</a></p>
+          })
+        }
       </div>
 
       <form className={styles.commentForm}>
