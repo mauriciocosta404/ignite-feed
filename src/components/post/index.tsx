@@ -28,6 +28,8 @@ export const Post: React.FC<PostPros> = ({ author, content, publishedAt }) => {
     "post muito bacana hein!"
   ]);
 
+  const [newCommentText, setNewCommentText] = useState('');
+
   const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'",{
     locale: ptBR,
   });
@@ -40,7 +42,12 @@ export const Post: React.FC<PostPros> = ({ author, content, publishedAt }) => {
   const handleCreateNewCommet = () =>{
     event?.preventDefault();
 
+    setComments([...comments, newCommentText]);
+    setNewCommentText('');
+  }
 
+  const handleNewCoommentChange = () =>{
+    setNewCommentText(event?.target.value);
   }
 
   return (
@@ -70,7 +77,7 @@ export const Post: React.FC<PostPros> = ({ author, content, publishedAt }) => {
 
       <form onSubmit={handleCreateNewCommet} className={styles.commentForm}>
         <strong>Deixe seu feedback</strong>
-        <textarea placeholder="deixe um comentário..." name="" id=""></textarea>
+        <textarea value={newCommentText} onChange={handleNewCoommentChange} placeholder="deixe um comentário..." name="comment" id=""></textarea>
         
         <footer>
           <button type="submit">Publicar</button>
