@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./index.module.css";
 import { Comment } from "../comment";
 import { Avatar } from "../avatar";
@@ -24,6 +24,10 @@ interface PostPros {
 
 
 export const Post: React.FC<PostPros> = ({ author, content, publishedAt }) => {
+  const [comments, setComments] = useState<string[]>([
+    "post muito bacana hein!"
+  ]);
+
   const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'",{
     locale: ptBR,
   });
@@ -32,6 +36,12 @@ export const Post: React.FC<PostPros> = ({ author, content, publishedAt }) => {
     locale: ptBR,
     addSuffix: true
   })
+
+  const handleCreateNewCommet = () =>{
+    event?.preventDefault();
+
+
+  }
 
   return (
     <article className={styles.post}>
@@ -58,7 +68,7 @@ export const Post: React.FC<PostPros> = ({ author, content, publishedAt }) => {
         }
       </div>
 
-      <form className={styles.commentForm}>
+      <form onSubmit={handleCreateNewCommet} className={styles.commentForm}>
         <strong>Deixe seu feedback</strong>
         <textarea placeholder="deixe um comentário..." name="" id=""></textarea>
         
@@ -69,8 +79,8 @@ export const Post: React.FC<PostPros> = ({ author, content, publishedAt }) => {
 
       <div className={styles.commentList}>
         {
-          Array.from({length:5}).map(()=>{
-            return (<Comment/>)
+          comments.map(comment => {
+            return (<Comment content={comment}/>)
           })
         }
       </div>
