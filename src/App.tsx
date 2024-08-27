@@ -21,7 +21,7 @@ const posts = [
     publishedAt:new Date('2022-05-03 20:00:00')
   },
   {
-    id:1,
+    id:2,
     author:{
       avatarUrl:"https://avatars.githubusercontent.com/u/95001318?v=4",
       name: "Mauricio Costa",
@@ -36,7 +36,7 @@ const posts = [
     publishedAt:new Date('2022-05-03 20:00:00')
   },
   {
-    id:1,
+    id:3,
     author:{
       avatarUrl:"https://avatars.githubusercontent.com/u/95001318?v=4",
       name: "Mauricio Costa",

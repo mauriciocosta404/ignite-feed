@@ -69,8 +69,8 @@ export const Post: React.FC<PostPros> = ({ author, content, publishedAt }) => {
       <div className={styles.content}>
         {
           content.map(line => {
-            if(line.type === 'paragraph') return <p>{line.content}</p>
-            if(line.type === 'link') return <p><a href="">{line.content}</a></p>
+            if(line.type === 'paragraph') return <p key={line.content}>{line.content}</p>
+            if(line.type === 'link') return <p key={line.content}><a href="">{line.content}</a></p>
           })
         }
       </div>
@@ -87,7 +87,7 @@ export const Post: React.FC<PostPros> = ({ author, content, publishedAt }) => {
       <div className={styles.commentList}>
         {
           comments.map(comment => {
-            return (<Comment content={comment}/>)
+            return (<Comment key={comment} content={comment}/>)
           })
         }
       </div>
