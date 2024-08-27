@@ -47,7 +47,13 @@ export const Post: React.FC<PostPros> = ({ author, content, publishedAt }) => {
   }
 
   const handleNewCoommentChange = () =>{
+    event?.target.setCustomValidity("");
+
     setNewCommentText(event?.target.value);
+  }
+
+  const handleNewCommentInvalid = () =>{
+    event?.target.setCustomValidity("esse campo é obrigatório");
   }
 
   const deleteComment = (commentToDelete: string) =>{
@@ -57,6 +63,8 @@ export const Post: React.FC<PostPros> = ({ author, content, publishedAt }) => {
 
     setComments(commentWithoutDeletedOne);
   }
+
+  const isNewCommentEmpty = newCommentText.length === 0;
 
   return (
     <article className={styles.post}>
@@ -85,10 +93,18 @@ export const Post: React.FC<PostPros> = ({ author, content, publishedAt }) => {
 
       <form onSubmit={handleCreateNewCommet} className={styles.commentForm}>
         <strong>Deixe seu feedback</strong>
-        <textarea value={newCommentText} onChange={handleNewCoommentChange} placeholder="deixe um comentário..." name="comment" id=""></textarea>
+        
+        <textarea 
+          required
+          onInvalid={handleNewCommentInvalid} 
+          value={newCommentText} 
+          onChange={handleNewCoommentChange} 
+          placeholder="deixe um comentário..." 
+          name="comment" 
+        />
         
         <footer>
-          <button type="submit">Publicar</button>
+          <button disabled={isNewCommentEmpty} type="submit">Publicar</button>
         </footer>
       </form>
 
