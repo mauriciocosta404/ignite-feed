@@ -50,6 +50,14 @@ export const Post: React.FC<PostPros> = ({ author, content, publishedAt }) => {
     setNewCommentText(event?.target.value);
   }
 
+  const deleteComment = (commentToDelete: string) =>{
+    const commentWithoutDeletedOne = comments.filter(comment =>{
+      return comment !== commentToDelete;
+    })
+
+    setComments(commentWithoutDeletedOne);
+  }
+
   return (
     <article className={styles.post}>
       <header>
@@ -87,7 +95,13 @@ export const Post: React.FC<PostPros> = ({ author, content, publishedAt }) => {
       <div className={styles.commentList}>
         {
           comments.map(comment => {
-            return (<Comment key={comment} content={comment}/>)
+            return (
+              <Comment 
+                onDeleteComment={deleteComment} 
+                key={comment} 
+                content={comment}
+              />
+            )
           })
         }
       </div>
