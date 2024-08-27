@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, FormEvent, InvalidEvent, useState } from "react";
 import styles from "./index.module.css";
 import { Comment } from "../comment";
 import { Avatar } from "../avatar";
 import {format, formatDistanceToNow} from "date-fns";
-import { ptBR } from "date-fns/locale";
+import { ptBR } from "date-fns/locale/pt-BR";
 
 interface Author{
   avatarUrl: string;
@@ -12,7 +12,7 @@ interface Author{
 }
 
 interface Content{
-  type: string;
+  type: 'paragraph'|'link';
   content: string;
 }
 
@@ -39,20 +39,20 @@ export const Post: React.FC<PostPros> = ({ author, content, publishedAt }) => {
     addSuffix: true
   })
 
-  const handleCreateNewCommet = () =>{
+  const handleCreateNewCommet = (event: FormEvent) =>{
     event?.preventDefault();
 
     setComments([...comments, newCommentText]);
     setNewCommentText('');
   }
 
-  const handleNewCoommentChange = () =>{
+  const handleNewCoommentChange = (event: ChangeEvent<HTMLTextAreaElement>) =>{
     event?.target.setCustomValidity("");
 
     setNewCommentText(event?.target.value);
   }
 
-  const handleNewCommentInvalid = () =>{
+  const handleNewCommentInvalid = (event: InvalidEvent<HTMLTextAreaElement>) =>{
     event?.target.setCustomValidity("esse campo é obrigatório");
   }
 
