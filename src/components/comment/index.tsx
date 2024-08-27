@@ -16,7 +16,7 @@ export const Comment:React.FC<CommentProps> = ({content, onDeleteComment}) =>{
     }
 
     const hadleLikeComment = () =>{
-        setLikeCount(likeCount + 1);
+        setLikeCount(prev => prev + 1);
     }
 
     return(
